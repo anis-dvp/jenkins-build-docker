@@ -1,15 +1,21 @@
-node {
-    stage('Clone') {
-        git branch: 'main', url: 'https://github.com/anis-dvp/mvn-helloword.git'
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven-3.9'
     }
-    stage('Build') {
-        sh '''
-            mvn clean package
-        '''
-    }
-    stage('Run') {
-        sh '''
-            java -jar target/demo-maven-1.0-SNAPSHOT.jar
-        '''
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/anis-dvp/mvn-helloword.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
     }
 }
