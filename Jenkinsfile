@@ -15,10 +15,18 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Maven') {
             steps {
                 dir('mvn-helloword') {
                     sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Build image Docker') {
+            steps {
+                dir('mvn-helloword') {
+                    sh 'docker build -t anis/mvn-helloword:latest .'
                 }
             }
         }
