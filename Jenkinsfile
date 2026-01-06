@@ -6,15 +6,19 @@ pipeline {
     }
 
     stages {
-        stage('Clone') {
+        stage('Clone projet Maven') {
             steps {
-                git 'https://github.com/anis-dvp/mvn-helloword.git'
+                dir('mvn-helloword') {
+                    git 'https://github.com/anis-dvp/mvn-helloword.git'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                dir('mvn-helloword') {
+                    sh 'mvn clean package'
+                }
             }
         }
     }
