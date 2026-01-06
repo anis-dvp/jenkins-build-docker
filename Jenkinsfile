@@ -9,7 +9,8 @@ pipeline {
         stage('Clone projet Maven') {
             steps {
                 dir('mvn-helloword') {
-                    git 'https://github.com/anis-dvp/mvn-helloword.git'
+                    git branch: 'main',
+                        url: 'https://github.com/anis-dvp/mvn-helloword.git'
                 }
             }
         }
